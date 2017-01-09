@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>${panel('header')}</head>
+    <body class="main-content">
+        ${panel('navigation')}
+        <div class="text-center">
+            <h3>Username:</h3>
+            <h4>${structure: user['userid']}</h4>
+            <br/>
+            <h4>Real name:</h4>
+            <h5>${structure: user['name']}</h5>
+            <br/>
+            <h4>Password:</h4>
+            <h5>${structure: user['pw']}</h5>
+        </div>
+    </body>
+</html>

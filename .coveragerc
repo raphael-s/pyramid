@@ -1,0 +1,3 @@
+[run]
+source = firstpyramid
+omit = firstpyramid/test*

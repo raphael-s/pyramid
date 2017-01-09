@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        ${panel('header')}
+        ${panel('deform')}
+    </head>
+    <body class="main-content">
+        ${panel('navigation')}
+        <div class="text-center">
+            <div tal:condition="exists:string:${error}" class="panel panel-danger">
+                <div class="panel-heading">
+                    <div class="panel-title">Login failed</div>
+                </div>
+                <div class="panel-body"><b class="text-danger">${error}</b></div>
+            </div>
+            <div class="upload-form">
+                <p>${structure: form}</p>
+            </div>
+        </div>
+    </body>
+</html>

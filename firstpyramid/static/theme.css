@@ -1,0 +1,30 @@
+body {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: #fff;
+  background: #bc2131;
+  margin-top: 60px;
+}
+
+.upload-form {
+  margin: 0 auto;
+  width: 40%;
+}
+
+@media only screen and (min-width: 1024px) {
+  .listed-image {
+    max-height: 250px;
+    max-width: 275px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .listed-image {
+  max-height: 150px;
+  max-width: 200px;
+  }
+}
+
+div.list-group {
+  margin-top: 15px;
+}

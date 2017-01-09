@@ -1,0 +1,10 @@
+<meta charset="utf-8">
+<meta name="description" content="Pyramid Image Gallery">
+<meta name="author" content="RaphaelS">
+<link rel="icon" type="image/png" href="${request.static_url('firstpyramid:static/favicon.jpg')}">
+<title>Pyramid Image Gallery</title>
+<link href="${request.static_url('firstpyramid:static/styles/bootstrap.css')}" rel="stylesheet">
+<link href="${request.static_url('firstpyramid:static/styles/bootstrap-theme.css')}" rel="stylesheet">
+<link href="${request.static_url('firstpyramid:static/theme.css')}" rel="stylesheet">
+<script src="${request.static_url('firstpyramid:static/scripts/jquery-3.1.1.min.js')}"></script>
+

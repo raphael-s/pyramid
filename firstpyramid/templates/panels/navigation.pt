@@ -1,0 +1,32 @@
+<div class="nav-spacer"></div>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="${request.route_url('index')}" class="navbar-brand">Pyramid Image Gallery</a>
+        </div>
+        <div class="navbar-collapse collapse" tal:define="userid request.authenticated_userid">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="${request.route_url('upload')}">Upload</a>
+                </li>
+                <li>
+                    <a href="">Search</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li tal:condition="userid">
+                    <a href="${request.route_url('user', userid=userid)}" tal:content="userid">User</a>
+                </li>
+                <li tal:condition="userid">
+                    <a href="${request.route_url('logout')}">Logout</a>
+                </li>
+                <li tal:condition="not: userid">
+                    <a href="${request.route_url('register')}">Register</a>
+                </li>
+                <li tal:condition="not: userid">
+                    <a href="${request.route_url('login')}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

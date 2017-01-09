@@ -1,0 +1,2 @@
+<script type="text/javascript" src="${request.static_url('deform:static/scripts/deform.js')}"></script>
+<script type="text/javascript" src="${request.static_url('deform:static/scripts/file_upload.js')}"></script>

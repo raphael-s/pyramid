@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        ${panel('header')}
+        ${panel('deform')}
+    </head>
+    <body class="main-content">
+        ${panel('navigation')}
+        <div class="text-center">
+            <div tal:condition="form" class="upload-form">
+                <p>${structure: form}</p>
+            </div>
+            <div tal:condition="not form">
+                <h3>Please login to upload images</h3>
+                <form action="${request.route_url('login')}">
+                    <input type="submit" value="Login" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

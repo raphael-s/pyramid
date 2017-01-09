@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>${panel('header')}</head>
+<body class="main-content">
+    ${panel('navigation')}
+    <div class="text-center">
+        <h1 tal:content="item['title']">Title</h1>
+        <a>
+            <img tal:attributes="src string:data:image;;base64,${item['image']}" width="60%">
+        </a>
+        <p>Uploaded by: <a tal:content="item['uploader']" href="${request.route_url('user', userid=item['uploader'])}">Username</a></p>
+    </div>
+</body>
+</html>
