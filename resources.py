@@ -19,7 +19,7 @@ class Root(Folder):
     __parent__ = None
 
 
-class UploadItem(Persistent):
+class ImageItem(Persistent):
 
     def add_item(self, new_item, request):
         root = firstpyramid.root_factory(request)
@@ -32,8 +32,7 @@ class UploadItem(Persistent):
 
         new_item['image'] = Blob(new_item['image'].file.read())
 
-        root['images'].update({new_key: new_item})
-        transaction.commit()
+        self.update_item(new_key, new_item, request)
         return new_key
 
     def get_item(self, item_id, request):
@@ -43,6 +42,33 @@ class UploadItem(Persistent):
     def get_items(self, request):
         root = firstpyramid.root_factory(request)
         return dict(root['images'])
+
+    def update_votes(self, item_id, vote_value, request):
+        item = self.get_item(item_id, request)
+        user = request.authenticated_userid
+
+        if user in item['voters'] or not user:
+            return item['votes']
+
+        item['votes'] += vote_value
+        item['voters'][user] = \
+            'up' if vote_value > 0 else 'down'
+
+        self.update_item(item_id, item, request)
+        return item['votes']
+
+    def update_item(self, key, value, request):
+        root = firstpyramid.root_factory(request)
+        root['images'].update({key: value})
+        transaction.commit()
+
+    def exists(self, request, item_id):
+        try:
+            self.get_item(item_id, request)
+        except KeyError:
+            return False
+
+        return True
 
 
 class UserItem(Persistent):

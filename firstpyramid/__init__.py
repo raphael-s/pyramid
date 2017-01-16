@@ -41,6 +41,10 @@ def main(global_config, **settings):
     config.add_route('register', '/register')
     config.add_route('user', '/user/{userid}')
 
+    # Data routes
+    config.add_route('upvote', '/upvote/{image_id}')
+    config.add_route('downvote', '/downvote/{image_id}')
+
     config.add_panel('firstpyramid.layout.nav_panel', 'navigation',
                      renderer='firstpyramid.layout:templates/panels/navigation.pt')
     config.add_panel('firstpyramid.layout.header_panel', 'header',

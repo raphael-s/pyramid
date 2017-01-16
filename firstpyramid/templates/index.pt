@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>${panel('header')}</head>
-<body class="main-content">
-    ${panel('navigation')}
-    <div class="row image-listing">
-        <div class="col-md-8 col-md-offset-2">
-            <div tal:repeat="item items" class="list-group">
-                <a href="${request.route_url('images', id=item['id'])}" class="list-group-item">
-                    <div class="list-image">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <img tal:attributes="src string:data:image;;base64,${item['image']}" class="listed-image">
-                            </div>
-                            <div class="col-md-7">
-                                <h1 tal:content="item['title']">Title</h1>
-                                <p tal:content="item['desc']">Description</p>
+    <head>
+        ${panel('header')}
+        <script src="${request.static_url('firstpyramid:static/scripts/vote.js')}"></script>
+    </head>
+    <body class="main-content">
+        ${panel('navigation')}
+        <div class="row image-listing">
+            <div class="col-md-8 col-md-offset-2">
+                <div tal:repeat="item items" class="list-group">
+                    <a href="${request.route_url('images', id=item['id'])}" class="list-group-item">
+                        <div class="list-image">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <img src="data:image;;base64,${item['image']}" class="listed-image">
+                                </div>
+                                <div class="col-md-7">
+                                    <h1>${item['title']}</h1>
+                                    <p>${item['desc']}</p>
+                                    <p class="index-uploader">By ${item['uploader']}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                    <a href="#" data-type="upvote" data-id="${item['id']}"
+                       tal:attributes="class item['css_classes']['up_classes']">
+                        <span class="glyphicon glyphicon-arrow-up"></span>
+                    </a>
+                    <p class="voting" data-type="'downvote'" id="votes-id-${item['id']}" tal:content="python:item['votes']">Votes</p>
+                    <a href="#" data-type="downvote" data-id="${item['id']}"
+                       tal:attributes="class item['css_classes']['down_classes']">
+                        <span class="glyphicon glyphicon-arrow-down"></span>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

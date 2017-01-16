@@ -23,8 +23,39 @@ body {
   max-height: 150px;
   max-width: 200px;
   }
+  p.index-uploader {
+  display: none;
+}
 }
 
 div.list-group {
   margin-top: 15px;
+  position: relative;
+}
+
+a.vote-button, p.voting {
+  position: absolute;
+  right: -80px;
+  top: 50%;
+  margin-top: 20px;
+}
+
+p.voting {
+  margin-top: -15px;
+  right: -70px;
+  font-size: 20px;
+}
+
+a.vote-button.btn-success {
+  margin-top: -67px;
+}
+
+p.index-uploader {
+  position: absolute;
+  right: 20px;
+  bottom: -90px;
+}
+
+a.voted {
+  border: 2px solid #333;
 }
