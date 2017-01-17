@@ -15,7 +15,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li tal:condition="userid">
-                    <a href="${request.route_url('user', userid=userid)}" tal:content="userid">User</a>
+                    <a href="${request.route_url('user', userid=userid)}">${econtext['context']['users'][userid]['name']}</a>
                 </li>
                 <li tal:condition="userid">
                     <a href="${request.route_url('logout')}">Logout</a>

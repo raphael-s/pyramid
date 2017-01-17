@@ -1,7 +1,7 @@
 from deform.schema import FileData
 from pyramid.httpexceptions import HTTPFound
 from pyramid.view import view_config
-from resources import UploadItem
+from resources import ImageItem
 import colander
 from security import b64
 import deform
@@ -58,10 +58,12 @@ def upload_view(request):
             'image': request.params.get('upload'),
             'uploader': request.authenticated_userid,
             'description': request.params.get('description'),
-            'tags': request.params.getall('tag')
+            'tags': request.params.getall('tag'),
+            'votes': 1,
+            'voters': {request.authenticated_userid: 'up'}
         }
 
-        new_key = UploadItem().add_item(new_item, request)
+        new_key = ImageItem().add_item(new_item, request)
         url = request.route_url('images', id=new_key)
 
         return HTTPFound(url)
@@ -80,4 +82,33 @@ def detail_view(request):
     return{'item': {'title': item['title'],
                     'image': b64(item['image']),
                     'id': item_id,
-                    'uploader': item['uploader']}}
+                    'uploader': item['uploader'],
+                    'votes': item['votes']}}
+
+
+@view_config(route_name='upvote', renderer='json')
+def upvote_data(request):
+    image_id = int(request.path.split('/')[-1])
+    votes = ImageItem().update_votes(image_id, 1, request)
+    return{'votes': votes_presage(votes)}
+
+
+@view_config(route_name='downvote', renderer='json')
+def downvote_data(request):
+    image_id = int(request.path.split('/')[-1])
+    if ImageItem().exists(request, image_id):
+        votes = ImageItem().update_votes(image_id, -1, request)
+        return{'votes': votes_presage(votes)}
+    else:
+        return 'The requested image does not exist'
+
+
+def votes_presage(votes):
+    pre = '+/- '
+    if votes > 0:
+        pre = '+ '
+    elif votes < 0:
+        pre = '- '
+        # Remove "-" from number
+        votes = -votes
+    return pre + str(votes)
