@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" href="${request.static_url('firstpyramid:static/favicon.jpg')}">
+    <title>Pyramid Image Gallery</title>
+    <link href="${request.static_url('firstpyramid:static/styles/bootstrap.css')}" rel="stylesheet">
+    <style>
+        .full-image-size {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .full-image {
+            width: auto;
+            height: auto;
+            max-height: 90%;
+            max-width: 90%;
+            margin-top: 2em;
+        }
+    </style>
+</head>
+<body class="main-content">
+    <div class="text-center full-image-size">
+        <img src="data:image;;base64,${image}" class="full-image" />
+    </div>
+</body>
+</html>
