@@ -34,6 +34,7 @@ def main(global_config, **settings):
     # Image routes
     config.add_route('upload', '/upload')
     config.add_route('images', '/images/{id}')
+    config.add_route('full_image', '/images/full/{id}')
 
     # User routes
     config.add_route('login', '/login')

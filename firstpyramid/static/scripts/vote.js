@@ -7,7 +7,7 @@ $(document).ready(function() {
         }
         var imageId = link.data('id');
         var type = link.data('type');
-        var url = type + '/' + imageId;
+        var url = '/' + type + '/' + imageId;
 
         jQuery.ajax({
             url     : url,

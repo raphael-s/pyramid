@@ -27,7 +27,7 @@
                        tal:attributes="class item['css_classes']['up_classes']">
                         <span class="glyphicon glyphicon-arrow-up"></span>
                     </a>
-                    <p class="voting" data-type="'downvote'" id="votes-id-${item['id']}" tal:content="python:item['votes']">Votes</p>
+                    <p class="voting" data-type="'downvote'" id="votes-id-${item['id']}">${item['votes']}</p>
                     <a href="#" data-type="downvote" data-id="${item['id']}"
                        tal:attributes="class item['css_classes']['down_classes']">
                         <span class="glyphicon glyphicon-arrow-down"></span>
