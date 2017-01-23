@@ -23,14 +23,13 @@
                         </li>
                     </ul>
                     <p>By <a href="${request.route_url('user', userid=item['uploader_id'])}">${item['uploader_name']}</a></p>
-                    <a href="#" data-type="upvote" data-id="${item['id']}"
-                           tal:attributes="class item['css_classes']['up_classes']">
-                        <span class="glyphicon glyphicon-arrow-up"></span>
+                    <a href="#" data-type="upvote" data-id="${item['id']}" tal:attributes="class item['css_classes']['up_classes']">
+                        <span class="glyphicon glyphicon-thumbs-up">
+                        </span> Like
                     </a>
-                    <p class="voting" data-type="'downvote'" id="votes-id-${item['id']}">${item['votes']}</p>
-                    <a href="#" data-type="downvote" data-id="${item['id']}"
-                       tal:attributes="class item['css_classes']['down_classes']">
-                        <span class="glyphicon glyphicon-arrow-down"></span>
+                    <a href="#" data-type="downvote" data-id="${item['id']}" tal:attributes="class item['css_classes']['down_classes']">
+                        <span class="glyphicon glyphicon-thumbs-down">
+                        </span> Dislike
                     </a>
                 </div>
             </div>

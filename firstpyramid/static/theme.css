@@ -3,7 +3,9 @@ body {
   font-weight: 300;
   color: #fff;
   background: #bc2131;
-  margin-top: 60px;
+  margin-top: 70px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .upload-form {
@@ -11,56 +13,18 @@ body {
   width: 40%;
 }
 
-@media only screen and (min-width: 1024px) {
-  .listed-image {
-    max-height: 250px;
-    max-width: 275px;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .listed-image {
-  max-height: 150px;
-  max-width: 200px;
-  }
-  p.index-uploader {
-  display: none;
-}
-}
-
-div.list-group {
-  margin-top: 15px;
-  position: relative;
-}
-
-a.vote-button, p.voting {
-  position: absolute;
-  right: -80px;
-  top: 50%;
-  margin-top: 20px;
-}
-
-p.voting {
-  margin-top: -15px;
-  right: -70px;
-  font-size: 20px;
-}
-
-a.vote-button.btn-success {
-  margin-top: -67px;
-}
-
-p.index-uploader {
-  position: absolute;
-  right: 20px;
-  bottom: -90px;
-}
-
 a.voted {
   border: 2px solid #333;
 }
 
 img.detail-view-image {
+  width: 100%;
+}
+
+.listed-image {
+  min-height: 200px;
+  max-height: 200px;
+  object-fit: cover;
   width: 100%;
 }
 
@@ -95,4 +59,18 @@ a.btn-back {
   position: absolute;
   top: 100;
   left: 10%;
+}
+
+p.list-image-uploader {
+  position: absolute;
+  top: 1.5em;
+  right: 3em;
+  background-color: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+a p.list-image-uploader:hover {
+  background-color: #DEDEDE;
 }

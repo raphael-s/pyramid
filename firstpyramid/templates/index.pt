@@ -6,32 +6,27 @@
     </head>
     <body class="main-content">
         ${panel('navigation')}
-        <div class="row image-listing">
-            <div class="col-md-8 col-md-offset-2">
-                <div tal:repeat="item items" class="list-group">
-                    <a href="${request.route_url('images', id=item['id'])}" class="list-group-item">
-                        <div class="list-image">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <img src="data:image;;base64,${item['image']}" class="listed-image">
-                                </div>
-                                <div class="col-md-7">
-                                    <h1>${item['title']}</h1>
-                                    <p>${item['desc']}</p>
-                                    <p class="index-uploader">By ${item['uploader']}</p>
-                                </div>
-                            </div>
+        <div class="container">
+            <div class="row" tal:repeat="row items">
+                <div tal:repeat="item row" class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <a href="${request.route_url('images', id=item['id'])}" class="list-group-item">
+                            <img src="data:image;;base64,${item['image']}" class="listed-image">
+                        </a>
+                        <div class="caption">
+                            <h3>${item['title']}</h3>
+                            <p>${item['desc']}</p>
+                            <a href="#" data-type="upvote" data-id="${item['id']}" tal:attributes="class item['css_classes']['up_classes']">
+                                <span class="glyphicon glyphicon-thumbs-up">
+                                </span> Like
+                            </a>
+                            <a href="#" data-type="downvote" data-id="${item['id']}" tal:attributes="class item['css_classes']['down_classes']">
+                                <span class="glyphicon glyphicon-thumbs-down">
+                                </span> Dislike
+                            </a>
+                            <a href="${request.route_url('user', userid=item['uploader_id'])}"><p class="list-image-uploader">By: ${item['uploader_name']}</p></a>
                         </div>
-                    </a>
-                    <a href="#" data-type="upvote" data-id="${item['id']}"
-                       tal:attributes="class item['css_classes']['up_classes']">
-                        <span class="glyphicon glyphicon-arrow-up"></span>
-                    </a>
-                    <p class="voting" data-type="'downvote'" id="votes-id-${item['id']}">${item['votes']}</p>
-                    <a href="#" data-type="downvote" data-id="${item['id']}"
-                       tal:attributes="class item['css_classes']['down_classes']">
-                        <span class="glyphicon glyphicon-arrow-down"></span>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>

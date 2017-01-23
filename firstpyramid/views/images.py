@@ -137,13 +137,13 @@ def votes_presage(votes):
 
 
 def get_css_classes(userid, vote=''):
-    base_classes = ['btn', 'btn-lg', 'btn-default', 'vote-button']
+    base_classes = ['btn', 'vote-button']
 
     if vote or not userid:
         base_classes.append('disabled')
 
     up_classes = base_classes + ['btn-success']
-    down_classes = base_classes + ['btn-warning']
+    down_classes = base_classes + ['btn-danger']
 
     if vote == 'up':
         up_classes.append('voted')

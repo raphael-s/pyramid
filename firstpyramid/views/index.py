@@ -1,5 +1,5 @@
 from pyramid.view import view_config
-from resources import ImageItem
+from resources import ImageItem, UserItem
 from security import b64
 from firstpyramid.views.images import votes_presage, get_css_classes
 
@@ -22,7 +22,14 @@ def home_view(request):
              'id': id_,
              'desc': item['description'],
              'votes': votes_presage(item['votes']),
-             'uploader': item['uploader'],
-             'css_classes': css_classes
+             'css_classes': css_classes,
+             'uploader_name': UserItem().get_user(item['uploader'],
+                                                  request)['name'],
+             'uploader_id': item['uploader'],
              })
-    return {'items': ret_items}
+
+    return {'items': chunker(ret_items, 4)}
+
+
+def chunker(seq, size):
+    return (seq[pos:pos + size] for pos in range(0, len(seq), size))
