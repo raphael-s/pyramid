@@ -74,3 +74,12 @@ p.list-image-uploader {
 a p.list-image-uploader:hover {
   background-color: #DEDEDE;
 }
+
+form .has-error p.help-block, form .has-error label.control-label {
+  color: #fff;
+}
+
+form .has-error input.form-control {
+  border: 2px solid orange;
+  border-color: orange;
+}

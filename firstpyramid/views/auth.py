@@ -18,11 +18,32 @@ def login_form():
     return deform.Form(schema, buttons=('login',))
 
 
+class UserNameNode(colander.SchemaNode):
+    schema_type = colander.String
+    title = 'User Name'
+
+    @colander.deferred
+    def validator(self, node):
+        request = self.bindings['request']
+        if not request:
+            raise colander.Invalid(node, 'No request')
+
+
 class RegisterSchema(colander.MappingSchema):
-    username = colander.SchemaNode(colander.String())
+    username = UserNameNode(
+        colander.String()
+    ).bind(request='request')
     password = colander.SchemaNode(
         colander.String(),
-        widget=deform.widget.PasswordWidget())
+        widget=deform.widget.PasswordWidget(),
+        validator=colander.All(
+            colander.Length(min=8),
+            colander.Regex('.*\d', msg='Use at least one number'),
+            colander.Regex('.*[a-z]', msg='Use at least one lowercase char'),
+            colander.Regex('.*[A-Z]', msg='Use at least one uppercase char'),
+            colander.Regex('.*[^\s]', msg='Dont use whitespaces'),
+        )
+    )
     real_name = colander.SchemaNode(colander.String())
 
 
@@ -49,11 +70,8 @@ def login_view(request):
 
         user = UserItem().get_user(input_user, request)
 
-        if not user:
-            return{'form': form, 'error': 'Unknown username'}
-
-        if not UserItem().check_pw(input_pw, user['pw']):
-            return{'form': form, 'error': 'Wrong password'}
+        if not user or not UserItem().check_pw(input_pw, user['pw']):
+            return{'form': form, 'error': 'Wrong login!'}
 
         headers = remember(request, user.get('userid'))
 
@@ -77,7 +95,7 @@ def register_view(request):
     if 'register' in request.params:
         controls = request.POST.items()
         try:
-            login_form().validate(controls)
+            register_form().validate(controls)
         except deform.ValidationFailure as e:
             # Form is NOT valid
             return {'form': e.render()}
